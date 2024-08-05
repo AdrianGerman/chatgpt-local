@@ -20,6 +20,7 @@ main {
   padding: 12px;
   margin-bottom: 16px;
   overflow-y: auto;
+  scroll-behavior: smooth;
 }
 
 ul {
@@ -96,6 +97,12 @@ form {
     cursor: pointer;
     padding: 8px;
     transition: background 0.3s ease;
+
+    &[disabled] {
+      background: #bc72da;
+      opacity: 0.6;
+      pointer-events: none;
+    }
 
     &:hover {
       background: #532b63;

@@ -16,6 +16,12 @@ $form.addEventListener("submit", (event) => {
     $input.value = "";
   }
   addMessage(messageText, "user");
+  $button.setAttribute("disabled", true);
+
+  setTimeout(() => {
+    addMessage("Hola, ¿Cómo estás?", "bot");
+    $button.removeAttribute("disabled");
+  }, 2000);
 });
 
 function addMessage(text, sender) {
@@ -30,7 +36,6 @@ function addMessage(text, sender) {
   $who.textContent = sender === "bot" ? "GPT" : "Tú";
   $newMessage.classList.add(sender);
 
-  // aqui actualizaremenos el scroll
-
   $messages.appendChild($newMessage);
+  $container.scrollTop = $container.scrollHeight;
 }
