@@ -15,4 +15,22 @@ $form.addEventListener("submit", (event) => {
     // añadimos el mensaje en el DOM
     $input.value = "";
   }
+  addMessage(messageText, "user");
 });
+
+function addMessage(text, sender) {
+  // clonar el template
+  const clonedTemplate = $template.content.cloneNode(true);
+  const $newMessage = clonedTemplate.querySelector(".message");
+
+  const $who = $newMessage.querySelector("span");
+  const $text = $newMessage.querySelector("p");
+
+  $text.textContent = text;
+  $who.textContent = sender === "bot" ? "GPT" : "Tú";
+  $newMessage.classList.add(sender);
+
+  // aqui actualizaremenos el scroll
+
+  $messages.appendChild($newMessage);
+}
