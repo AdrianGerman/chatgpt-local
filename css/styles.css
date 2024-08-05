@@ -6,6 +6,7 @@ body {
   display: grid;
   place-content: center;
   height: 100dvh;
+  overflow: hidden;
 }
 
 main {
@@ -100,4 +101,43 @@ form {
       background: #532b63;
     }
   }
+}
+
+/* scroll */
+
+/* Estilo para navegadores WebKit (Chrome, Safari) */
+::-webkit-scrollbar {
+  width: 12px; /* Ancho del scroll vertical */
+  height: 12px; /* Alto del scroll horizontal */
+}
+
+/* Estilo de la barra del scroll */
+::-webkit-scrollbar-track {
+  background: #2c2c2c; /* Color de fondo del track del scroll */
+  border-radius: 10px; /* Bordes redondeados del track */
+}
+
+/* Estilo del thumb del scroll (la parte que se mueve) */
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(
+    45deg,
+    #444444,
+    #888888
+  ); /* Degradado del thumb */
+  border-radius: 10px; /* Bordes redondeados del thumb */
+  border: 2px solid #2c2c2c; /* Borde alrededor del thumb */
+}
+
+/* Estilo del thumb del scroll al pasar el mouse */
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(
+    45deg,
+    #666666,
+    #aaaaaa
+  ); /* Degradado del thumb al pasar el mouse */
+}
+
+/* Estilo de la esquina de scroll (cuando hay ambos scrollbars) */
+::-webkit-scrollbar-corner {
+  background: #2c2c2c; /* Color de fondo de la esquina del scroll */
 }
