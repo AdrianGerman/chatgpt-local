@@ -1,13 +1,5 @@
 import { CreateMLCEngine } from "https://esm.run/@mlc-ai/web-llm";
 
-const SELECTED_MODEL = "gemma-2b-it-q4f32_1-MLC";
-
-const engine = await CreateMLCEngine(SELECTED_MODEL, {
-  initProgressCallback: (info) => {
-    console.log("initProgressCalback", info);
-  },
-});
-
 const $ = (el) => document.querySelector(el);
 
 const $form = $("form");
@@ -16,6 +8,16 @@ const $template = $("#message-template");
 const $messages = $("ul");
 const $container = $("main");
 const $button = $("button");
+const $info = $("small");
+
+const SELECTED_MODEL = "gemma-2b-it-q4f32_1-MLC";
+
+const engine = await CreateMLCEngine(SELECTED_MODEL, {
+  initProgressCallback: (info) => {
+    console.log("initProgressCalback", info);
+    $info.textContent = `${info.text}`;
+  },
+});
 
 $form.addEventListener("submit", (event) => {
   event.preventDefault();

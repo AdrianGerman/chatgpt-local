@@ -110,6 +110,18 @@ form {
   }
 }
 
+small {
+  font-size: 10px;
+  color: rgb(176, 176, 176);
+  position: fixed;
+  bottom: 10px;
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: 400px;
+  text-align: center;
+}
+
 /* scroll */
 
 /* Estilo para navegadores WebKit (Chrome, Safari) */
