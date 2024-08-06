@@ -10,16 +10,21 @@ const $container = $("main");
 const $button = $("button");
 const $info = $("small");
 
+let messages = [];
+
 const SELECTED_MODEL = "gemma-2b-it-q4f32_1-MLC";
 
 const engine = await CreateMLCEngine(SELECTED_MODEL, {
   initProgressCallback: (info) => {
     console.log("initProgressCalback", info);
     $info.textContent = `${info.text}`;
+    if (info.progress === 1) {
+      $button.removeAttribute("disabled");
+    }
   },
 });
 
-$form.addEventListener("submit", (event) => {
+$form.addEventListener("submit", async (event) => {
   event.preventDefault();
   const messageText = $input.value.trim();
 
@@ -30,10 +35,11 @@ $form.addEventListener("submit", (event) => {
   addMessage(messageText, "user");
   $button.setAttribute("disabled", true);
 
-  setTimeout(() => {
-    addMessage("Hola, ¿Cómo estás?", "bot");
-    $button.removeAttribute("disabled");
-  }, 2000);
+  const reply = await engine.chat.completions.create({
+    messages: [...messages, { role: "user", content: messageText }],
+  });
+
+  console.log(reply);
 });
 
 function addMessage(text, sender) {
