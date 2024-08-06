@@ -1,20 +1,36 @@
+:root {
+  --background-dark: #201e1c;
+  --background-chat: #262422;
+  --color-border: #373737;
+  --purple-color-primary: #76428a;
+  --color-text: #d8d8d8;
+  --color-small: #b0b0b0;
+}
+
 body {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  background: #242424;
-  color: #d8d8d8;
+  background: var(--background-dark);
+  color: var(--color-text);
   display: grid;
   place-content: center;
-  height: 100dvh;
+  /* height: 100dvh; */
   overflow: hidden;
 }
 
+header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 main {
-  width: 400px;
-  max-width: 100%;
-  height: 70dvh;
-  background-color: #343434;
-  border: 1px solid #ccc;
+  max-width: 800px;
+  min-width: 320px;
+  display: flex;
+  height: 75dvh;
+  background-color: var(--background-chat);
+  border: 1px solid var(--color-border);
   border-radius: 4px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   padding: 12px;
@@ -28,18 +44,21 @@ ul {
   flex-direction: column;
   list-style: none;
   padding: 0;
+  width: 800px;
+  height: 70dvh;
 }
 
 .message {
   display: flex;
   flex-direction: column;
+  gap: 0.6rem;
   margin: 4px 0;
   padding: 4px 8px;
 
   > span {
     width: 36px;
     height: 36px;
-    background-color: #242424;
+    background-color: var(--background-dark);
     border-radius: 100%;
     font-size: 12px;
     font-weight: 500;
@@ -49,7 +68,7 @@ ul {
   }
 
   > p {
-    padding: 4px 8px;
+    padding: 12px;
     border-radius: 6px;
     margin-top: 6px;
   }
@@ -65,8 +84,7 @@ ul {
 
   &.bot {
     align-self: flex-start;
-    span,
-    p {
+    span {
       background-color: #405d5d;
     }
   }
@@ -75,24 +93,28 @@ ul {
 form {
   display: flex;
   input {
-    border-radius: 999px;
+    border-radius: 999999px;
     flex-grow: 1;
     border: 0;
-    padding: 8px;
+    padding: 16px;
     margin-right: 8px;
-    border: 1px solid #ccc;
-    background-color: #343434;
-    color: #d8d8d8;
+    border: 1px solid var(--color-border);
+    background-color: var(--background-chat);
+    color: var(--color-text);
+    font-size: 16px;
 
     &::placeholder {
-      color: #d8d8d8;
+      color: #828282;
+    }
+    &:focus {
+      outline: none;
     }
   }
 
   button {
-    background: #76428a;
+    background: var(--purple-color-primary);
     border: 0;
-    color: #d8d8d8;
+    color: var(--color-text);
     border-radius: 6px;
     cursor: pointer;
     padding: 8px;
@@ -112,7 +134,7 @@ form {
 
 small {
   font-size: 10px;
-  color: rgb(176, 176, 176);
+  color: var(--color-small);
   position: fixed;
   bottom: 10px;
   left: 0;
@@ -123,18 +145,16 @@ small {
 }
 
 .loading {
-  text-align: center;
   display: flex;
-  justify-content: center;
-  height: 100%;
-  align-items: center;
   flex-direction: column;
-  margin-top: 50%;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
 
   i {
     pointer-events: none;
-    width: 2.5rem;
-    height: 2.5rem;
+    width: 2.5em;
+    height: 2.5em;
     border: 0.4em solid transparent;
     border-color: #eee;
     border-top-color: #76428a;
@@ -161,41 +181,33 @@ small {
   }
 }
 
-/* scroll */
+/* scroll styles */
 
 /* Estilo para navegadores WebKit (Chrome, Safari) */
 ::-webkit-scrollbar {
-  width: 12px; /* Ancho del scroll vertical */
-  height: 12px; /* Alto del scroll horizontal */
+  width: 12px;
+  height: 12px;
 }
 
 /* Estilo de la barra del scroll */
 ::-webkit-scrollbar-track {
-  background: #2c2c2c; /* Color de fondo del track del scroll */
-  border-radius: 10px; /* Bordes redondeados del track */
+  background: #2c2c2c;
+  border-radius: 10px;
 }
 
 /* Estilo del thumb del scroll (la parte que se mueve) */
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(
-    45deg,
-    #444444,
-    #888888
-  ); /* Degradado del thumb */
-  border-radius: 10px; /* Bordes redondeados del thumb */
-  border: 2px solid #2c2c2c; /* Borde alrededor del thumb */
+  background: linear-gradient(45deg, #444444, #888888);
+  border-radius: 10px;
+  border: 2px solid #2c2c2c;
 }
 
 /* Estilo del thumb del scroll al pasar el mouse */
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(
-    45deg,
-    #666666,
-    #aaaaaa
-  ); /* Degradado del thumb al pasar el mouse */
+  background: linear-gradient(45deg, #666666, #aaaaaa);
 }
 
 /* Estilo de la esquina de scroll (cuando hay ambos scrollbars) */
 ::-webkit-scrollbar-corner {
-  background: #2c2c2c; /* Color de fondo de la esquina del scroll */
+  background: #2c2c2c;
 }

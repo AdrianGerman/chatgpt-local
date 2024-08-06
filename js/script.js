@@ -42,7 +42,6 @@ $form.addEventListener("submit", async (event) => {
   const messageText = $input.value.trim();
 
   if (messageText !== "") {
-    // añadimos el mensaje en el DOM
     $input.value = "";
   }
   addMessage(messageText, "user");
@@ -69,6 +68,7 @@ $form.addEventListener("submit", async (event) => {
     const content = choice?.delta?.content ?? "";
     reply += content;
     $botMessage.textContent = reply;
+    $container.scrollTop = $container.scrollHeight;
   }
 
   $button.removeAttribute("disabled");
