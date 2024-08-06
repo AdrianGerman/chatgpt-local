@@ -12,6 +12,7 @@ const $info = $("small");
 
 let messages = [];
 
+// este es el modelo que usa de AI, puedes cambiarlo.
 const SELECTED_MODEL = "gemma-2b-it-q4f32_1-MLC";
 
 const engine = await CreateMLCEngine(SELECTED_MODEL, {
@@ -42,14 +43,25 @@ $form.addEventListener("submit", async (event) => {
 
   messages.push(userMessage);
 
-  const reply = await engine.chat.completions.create({
+  const chunks = await engine.chat.completions.create({
     messages,
+    stream: true,
   });
 
+  let reply = "";
+
+  const $botMessage = addMessage("", "bot");
+
+  for await (const chunk of chunks) {
+    const [choice] = chunk.choices;
+    const content = choice?.delta?.content ?? "";
+    reply += content;
+    $botMessage.textContent = reply;
+    console.log(chunk.choices);
+  }
+
   $button.removeAttribute("disabled");
-  const botMessage = reply.choices[0].message;
-  messages.push(botMessage);
-  addMessage(botMessage.content, "bot");
+  messages.push({ role: "assistant", content: reply });
 });
 
 function addMessage(text, sender) {
@@ -66,4 +78,6 @@ function addMessage(text, sender) {
 
   $messages.appendChild($newMessage);
   $container.scrollTop = $container.scrollHeight;
+
+  return $text;
 }
