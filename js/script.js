@@ -1,4 +1,4 @@
-import { CreateMLCEngine } from "https://esm.run/@mlc-ai/web-llm";
+import { CreateWebWorkerMLCEngine } from "https://esm.run/@mlc-ai/web-llm";
 
 const $ = (el) => document.querySelector(el);
 
@@ -12,31 +12,21 @@ const $info = $("small");
 
 let messages = [];
 
-if (window.Worker) {
-  const worker = new Worker("../js/worker.js");
-  worker.postMessage({ name: "hello" });
-  worker.onmessage = (e) => {
-    console.log("Worker: Message received from main thread");
-    console.log(e);
-    if (e.data.name === "hello back") {
-      console.log("Worker: Sending message to main thread");
-      worker.postMessage({ name: "hello back" });
-    }
-  };
-}
-
 // este es el modelo que usa de AI, puedes cambiarlo.
 const SELECTED_MODEL = "gemma-2b-it-q4f32_1-MLC";
 
-const engine = await CreateMLCEngine(SELECTED_MODEL, {
-  initProgressCallback: (info) => {
-    // console.log("initProgressCalback", info);
-    $info.textContent = `${info.text}`;
-    if (info.progress === 1) {
-      $button.removeAttribute("disabled");
-    }
+const engine = await CreateWebWorkerMLCEngine(
+  new Worker("../js/worker.js", { type: "module" }),
+  SELECTED_MODEL,
+  {
+    initProgressCallback: (info) => {
+      $info.textContent = `${info.text}`;
+      if (info.progress === 1) {
+        $button.removeAttribute("disabled");
+      }
+    },
   },
-});
+);
 
 $form.addEventListener("submit", async (event) => {
   event.preventDefault();
