@@ -33,13 +33,23 @@ $form.addEventListener("submit", async (event) => {
     $input.value = "";
   }
   addMessage(messageText, "user");
-  $button.setAttribute("disabled", true);
+  $button.setAttribute("disabled", "");
+
+  const userMessage = {
+    role: "user",
+    content: messageText,
+  };
+
+  messages.push(userMessage);
 
   const reply = await engine.chat.completions.create({
-    messages: [...messages, { role: "user", content: messageText }],
+    messages,
   });
 
-  console.log(reply);
+  $button.removeAttribute("disabled");
+  const botMessage = reply.choices[0].message;
+  messages.push(botMessage);
+  addMessage(botMessage.content, "bot");
 });
 
 function addMessage(text, sender) {
