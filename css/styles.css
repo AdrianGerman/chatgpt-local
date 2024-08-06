@@ -122,6 +122,45 @@ small {
   text-align: center;
 }
 
+.loading {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  height: 100%;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 50%;
+
+  i {
+    pointer-events: none;
+    width: 2.5rem;
+    height: 2.5rem;
+    border: 0.4em solid transparent;
+    border-color: #eee;
+    border-top-color: #76428a;
+    border-radius: 50%;
+    animation: loadingspin 1s linear infinite;
+  }
+
+  h4 {
+    color: #c1c1c1;
+    margin-bottom: 8px;
+  }
+
+  h5 {
+    font-weight: 400;
+    margin: 0;
+    font-size: 10px;
+    opacity: 0.6;
+  }
+}
+
+@keyframes loadingspin {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
 /* scroll */
 
 /* Estilo para navegadores WebKit (Chrome, Safari) */

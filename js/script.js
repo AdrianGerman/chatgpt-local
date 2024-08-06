@@ -9,8 +9,10 @@ const $messages = $("ul");
 const $container = $("main");
 const $button = $("button");
 const $info = $("small");
+const $loading = $(".loading");
 
 let messages = [];
+let end = false;
 
 // este es el modelo que usa de AI, puedes cambiarlo.
 const SELECTED_MODEL = "gemma-2b-it-q4f32_1-MLC";
@@ -21,8 +23,15 @@ const engine = await CreateWebWorkerMLCEngine(
   {
     initProgressCallback: (info) => {
       $info.textContent = info.text;
-      if (info.progress === 1) {
+      if (info.progress === 1 && !end) {
+        end = true;
+        $loading?.parentNode?.removeChild($loading);
         $button.removeAttribute("disabled");
+        addMessage(
+          "¡Hola! Soy un ChatGPT que se ejecuta completamente en tu navegador. ¿En qué puedo ayudarte hoy?",
+          "bot",
+        );
+        $input.focus();
       }
     },
   },
