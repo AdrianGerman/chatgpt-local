@@ -1,4 +1,4 @@
-import { CreateWebWorkerMLCEngine } from "https://esm.run/@mlc-ai/web-llm";
+import { CreateWebWorkerMLCEngine } from "https://cdn.jsdelivr.net/npm/@mlc-ai/web-llm@0.2.46/+esm";
 
 const $ = (el) => document.querySelector(el);
 
@@ -20,7 +20,7 @@ const engine = await CreateWebWorkerMLCEngine(
   SELECTED_MODEL,
   {
     initProgressCallback: (info) => {
-      $info.textContent = `${info.text}`;
+      $info.textContent = info.text;
       if (info.progress === 1) {
         $button.removeAttribute("disabled");
       }
@@ -60,7 +60,6 @@ $form.addEventListener("submit", async (event) => {
     const content = choice?.delta?.content ?? "";
     reply += content;
     $botMessage.textContent = reply;
-    console.log(chunk.choices);
   }
 
   $button.removeAttribute("disabled");
