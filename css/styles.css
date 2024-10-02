@@ -32,7 +32,7 @@ main {
   background-color: var(--background-chat);
   border: 1px solid var(--color-border);
   border-radius: 4px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 11px 9px 6px 5px rgba(0, 0, 0, 0.1);
   padding: 12px;
   margin-bottom: 16px;
   overflow-y: auto;
@@ -71,6 +71,8 @@ ul {
     padding: 12px;
     border-radius: 6px;
     margin-top: 6px;
+    background-color: darkslategrey;
+    line-height: 1.4;
   }
 
   &.user {
@@ -92,6 +94,7 @@ ul {
 
 form {
   display: flex;
+  box-shadow: 11px 9px 6px 5px rgba(0, 0, 0, 0.1);
   input {
     border-radius: 999999px;
     flex-grow: 1;
